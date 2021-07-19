@@ -1,0 +1,1 @@
+# moodle-message_output_mattermost

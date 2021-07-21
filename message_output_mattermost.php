@@ -27,7 +27,7 @@ require_once($CFG->dirroot.'/message/output/lib.php');
 class message_output_mattermost extends message_output {
 
     /**
-     * Processes the message and sends a notification via slack
+     * Processes the message and sends a notification via mattermost
      *
      * @param stdClass $eventdata the event data submitted by the message sender plus $eventdata->savedmessageid
      * @return true if ok, false if error
@@ -42,12 +42,12 @@ class message_output_mattermost extends message_output {
 
         if (!empty($CFG->noemailever)) {
             // Hidden setting for development sites, set in config.php if needed.
-            debugging('$CFG->noemailever is active, no slack message sent.', DEBUG_MINIMAL);
+            debugging('$CFG->noemailever is active, no matttermost message sent.', DEBUG_MINIMAL);
             return true;
         }
 
         // TODO: Add mattermost manager send message call here.
-        // return $this->slackmanager->send_message($eventdata->fullmessage, $eventdata->userto->id);
+        // return $this->matttermostmanager->send_message($eventdata->fullmessage, $eventdata->userto->id);
         return true;
     }
 
@@ -59,11 +59,11 @@ class message_output_mattermost extends message_output {
     public function config_form($preferences) {
         global $USER;
         if (!$this->is_system_configured()) {
-            return get_string('notconfigured', 'message_slack');
+            return get_string('notconfigured', 'message_matttermost');
         } else {
             // TODO: Add mattermost manager config form call here.
             return true;
-            // return $this->slackmanager->config_form($preferences, $USER->id);
+            // return $this->matttermostmanager->config_form($preferences, $USER->id);
         }
     }
 
@@ -74,7 +74,7 @@ class message_output_mattermost extends message_output {
      * @param array $preferences preferences array
      */
     public function process_form($form, &$preferences) {
-        // This is handled by the callback in slackconnect.php. If there is ever a form to do this, it would need similar options
+        // This is handled by the callback in matttermostconnect.php. If there is ever a form to do this, it would need similar options
         // as in "manager::function set_user_connection".
         return true;
     }
@@ -87,25 +87,25 @@ class message_output_mattermost extends message_output {
      * @param int $userid the user id
      */
     public function load_data(&$preferences, $userid) {
-        // $preferences->slack_user_id = get_user_preferences('message_processor_slack_user_id', '', $userid);
-        // $preferences->slack_access_token = get_user_preferences('message_processor_slack_access_token', '', $userid);
-        // $preferences->slack_channel = get_user_preferences('message_processor_slack_channel', '', $userid);
-        // $preferences->slack_channel_id = get_user_preferences('message_processor_slack_channel_id', '', $userid);
-        // $preferences->slack_configuration_url = get_user_preferences('message_processor_slack_configuration_url', '', $userid);
-        // $preferences->slack_url = get_user_preferences('message_processor_slack_url', '', $userid);
+        // $preferences->matttermost_user_id = get_user_preferences('message_processor_matttermost_user_id', '', $userid);
+        // $preferences->matttermost_access_token = get_user_preferences('message_processor_matttermost_access_token', '', $userid);
+        // $preferences->matttermost_channel = get_user_preferences('message_processor_matttermost_channel', '', $userid);
+        // $preferences->matttermost_channel_id = get_user_preferences('message_processor_matttermost_channel_id', '', $userid);
+        // $preferences->matttermost_configuration_url = get_user_preferences('message_processor_matttermost_configuration_url', '', $userid);
+        // $preferences->matttermost_url = get_user_preferences('message_processor_matttermost_url', '', $userid);
     }
 
     /**
-     * Tests whether the Slack settings have been configured
-     * @return boolean true if Slack is configured
+     * Tests whether the matttermost settings have been configured
+     * @return boolean true if matttermost is configured
      */
     public function is_system_configured() {
         return true;
-        // return (!empty($this->slackmanager->config('clientid')) && !empty($this->slackmanager->config('clientsecret')));
+        // return (!empty($this->matttermostmanager->config('clientid')) && !empty($this->matttermostmanager->config('clientsecret')));
     }
 
     /**
-     * Tests whether the Slack settings have been configured on user level
+     * Tests whether the matttermost settings have been configured on user level
      * @param  object $user the user object, defaults to $USER.
      * @return bool has the user made all the necessary settings
      * in their profile to allow this plugin to be used.
@@ -117,6 +117,6 @@ class message_output_mattermost extends message_output {
             $user = $USER;
         }
         return true;
-        // return $this->slackmanager->validate_user_connection($user->id);
+        // return $this->matttermostmanager->validate_user_connection($user->id);
     }
 }

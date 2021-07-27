@@ -31,7 +31,7 @@ class message_output_mattermost extends message_output {
     }
 
     /**
-     * Processes the message and sends a notification via slack
+     * Processes the message and sends a notification via mattermost
      *
      * @param stdClass $eventdata the event data submitted by the message sender plus $eventdata->savedmessageid
      * @return true if ok, false if error
@@ -46,7 +46,7 @@ class message_output_mattermost extends message_output {
 
         if (!empty($CFG->noemailever)) {
             // Hidden setting for development sites, set in config.php if needed.
-            debugging('$CFG->noemailever is active, no slack message sent.', DEBUG_MINIMAL);
+            debugging('$CFG->noemailever is active, no mattermost message sent.', DEBUG_MINIMAL);
             return true;
         }
 

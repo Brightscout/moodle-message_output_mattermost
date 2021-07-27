@@ -26,8 +26,12 @@ require_once($CFG->dirroot.'/message/output/lib.php');
 
 class message_output_mattermost extends message_output {
 
+    public function __construct() {
+        $this->manager = new message_mattermost\manager();
+    }
+
     /**
-     * Processes the message and sends a notification via mattermost
+     * Processes the message and sends a notification via slack
      *
      * @param stdClass $eventdata the event data submitted by the message sender plus $eventdata->savedmessageid
      * @return true if ok, false if error
@@ -42,13 +46,11 @@ class message_output_mattermost extends message_output {
 
         if (!empty($CFG->noemailever)) {
             // Hidden setting for development sites, set in config.php if needed.
-            debugging('$CFG->noemailever is active, no matttermost message sent.', DEBUG_MINIMAL);
+            debugging('$CFG->noemailever is active, no slack message sent.', DEBUG_MINIMAL);
             return true;
         }
 
-        // TODO: Add mattermost manager send message call here.
-        // return $this->matttermostmanager->send_message($eventdata->fullmessage, $eventdata->userto->id);
-        return true;
+        return $this->manager->send_message($eventdata->fullmessage, $eventdata->userto->email);
     }
 
     /**
@@ -59,11 +61,9 @@ class message_output_mattermost extends message_output {
     public function config_form($preferences) {
         global $USER;
         if (!$this->is_system_configured()) {
-            return get_string('notconfigured', 'message_matttermost');
+            return get_string('notconfigured', 'message_mattermost');
         } else {
-            // TODO: Add mattermost manager config form call here.
-            return true;
-            // return $this->matttermostmanager->config_form($preferences, $USER->id);
+            return $this->manager->config_form($preferences, $USER->id);
         }
     }
 
@@ -74,8 +74,7 @@ class message_output_mattermost extends message_output {
      * @param array $preferences preferences array
      */
     public function process_form($form, &$preferences) {
-        // This is handled by the callback in matttermostconnect.php. If there is ever a form to do this, it would need similar options
-        // as in "manager::function set_user_connection".
+        // This is handled by the callback in mattermostconnect.php.
         return true;
     }
 
@@ -87,25 +86,19 @@ class message_output_mattermost extends message_output {
      * @param int $userid the user id
      */
     public function load_data(&$preferences, $userid) {
-        // $preferences->matttermost_user_id = get_user_preferences('message_processor_matttermost_user_id', '', $userid);
-        // $preferences->matttermost_access_token = get_user_preferences('message_processor_matttermost_access_token', '', $userid);
-        // $preferences->matttermost_channel = get_user_preferences('message_processor_matttermost_channel', '', $userid);
-        // $preferences->matttermost_channel_id = get_user_preferences('message_processor_matttermost_channel_id', '', $userid);
-        // $preferences->matttermost_configuration_url = get_user_preferences('message_processor_matttermost_configuration_url', '', $userid);
-        // $preferences->matttermost_url = get_user_preferences('message_processor_matttermost_url', '', $userid);
+        $preferences->mattermost_notification = get_user_preferences('message_processor_mattermost_notification', '', $userid);
     }
 
     /**
-     * Tests whether the matttermost settings have been configured
-     * @return boolean true if matttermost is configured
+     * Tests whether the Mattermost settings have been configured
+     * @return boolean true if Mattermost is configured
      */
     public function is_system_configured() {
-        return true;
-        // return (!empty($this->matttermostmanager->config('clientid')) && !empty($this->matttermostmanager->config('clientsecret')));
+        return (!empty(get_config('message_mattermost', 'serverurl')) && !empty(get_config('message_mattermost', 'secret')));
     }
 
     /**
-     * Tests whether the matttermost settings have been configured on user level
+     * Tests whether the Mattermost settings have been configured on user level
      * @param  object $user the user object, defaults to $USER.
      * @return bool has the user made all the necessary settings
      * in their profile to allow this plugin to be used.
@@ -116,7 +109,6 @@ class message_output_mattermost extends message_output {
         if ($user === null) {
             $user = $USER;
         }
-        return true;
-        // return $this->matttermostmanager->validate_user_connection($user->id);
+        return ($this->manager->is_notification_enabled($user->id));
     }
 }

@@ -18,7 +18,7 @@ jobs:
       - name: Build Plugin
         id: build
         run: |
-          make build version=${{ github.ref }}
+          make build VERSION=${{ github.ref }}
           echo ::set-output name=BUNDLE_NAME::$(cd dist; ls *.zip)
 
       - name: Create Release

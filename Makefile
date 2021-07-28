@@ -5,7 +5,7 @@ VERSION ?= v0.1.0
 build: clean
 	mkdir -p dist/mattermost
 	rsync -av --progress --exclude="dist" --exclude=".git" . dist/mattermost
-	cd ./dist && zip -r message_mattermost_moodle-$(VERSION) mattermost
+	cd ./dist && zip -r message_mattermost_moodle-$(VERSION).zip mattermost
 
 ## Clean removes all build artifacts.
 .PHONY: clean

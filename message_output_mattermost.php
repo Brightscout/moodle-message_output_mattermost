@@ -35,6 +35,10 @@ require_once($CFG->dirroot.'/message/output/lib.php');
  */
 class message_output_mattermost extends message_output {
 
+    public function __construct() {
+        $this->manager = new message_mattermost\manager();
+    }
+
     /**
      * Constructor to add needed properties to the Mattermost app.
      */

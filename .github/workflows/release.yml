@@ -16,6 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Plugin
+        id: build
         run: |
           make build
           echo ::set-output name=BUNDLE_NAME::$(cd dist; ls *.zip)

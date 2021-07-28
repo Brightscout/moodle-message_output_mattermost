@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mattermost message plugin manager.
+ *
  * @package   message_mattermost
  * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/
+ */
 
 namespace message_mattermost;
 
@@ -26,6 +28,13 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot.'/message/output/lib.php');
 require_once($CFG->dirroot.'/lib/filelib.php');
 
+/**
+ * Mattermot helper manager class
+ *
+ * @package   message_mattermost
+ * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class manager {
 
     /**
@@ -39,7 +48,7 @@ class manager {
      * Send the message to Mattermost.
      * @param string $message The message contect to send to Mattermost.
      * @param string $email The Moodle user email that is being sent to.
-    */
+     */
     public function send_message($message, $email) {
         $curl = new \curl();
 
@@ -56,10 +65,13 @@ class manager {
             'message' => $message,
         );
         $payload = json_encode($payload);
-        $webhookurl = $this->config->serverurl.'/plugins/com.mattermost.moodle-notification/api/v1/notify?secret='.$this->config->secret;
+
+        $webhookurl = $this->config->serverurl;
+        $webhookurl .= '/plugins/com.mattermost.moodle-notification/api/v1/notify?secret='.$this->config->secret;
+
         $curl->post($webhookurl, $payload, $options);
         $info = $curl->get_info();
-        if(!empty($info['http_code']) && $info['http_code'] != 200){
+        if (!empty($info['http_code']) && $info['http_code'] != 200) {
             debugging('Unexpected response from the Mattermost server, HTTP code:' . $info['http_code'], DEBUG_DEVELOPER);
             return false;
         }
@@ -81,18 +93,18 @@ class manager {
      * @param array $preferences An array of user preferences.
      * @param int $userid Moodle id of the user in question.
      * @return string The HTML for the form.
-    */
+     */
     public function config_form ($preferences, $userid) {
         $checked = '';
         $text = 'Enable Mattermost Notifications';
         $pref = true;
-        if((bool)get_user_preferences('message_processor_mattermost_notification', null, $userid)){
+        if ((bool)get_user_preferences('message_processor_mattermost_notification', null, $userid)) {
             $checked = 'checked="checked"';
             $text = 'Disable Mattermost Notifications';
-            $pref = false;        
+            $pref = false;
         }
-        
-        $url = new \moodle_url($this->redirect_uri(), ['pref'=> $pref, 'userid' => $userid,
+
+        $url = new \moodle_url($this->redirect_uri(), ['pref' => $pref, 'userid' => $userid,
         'sesskey' => sesskey()]);
         $configbutton = '<div align="left" style="display: flex;">
                         <a href="'.$url.'">
@@ -105,13 +117,13 @@ class manager {
     /**
      * Update the user's mattermost notification preference.
      * @param bool $val The preference to set.
-    */
-    public function update_preference($val){
+     */
+    public function update_preference($val) {
         global $USER;
         if ($val == 1) {
-            set_user_preference('message_processor_mattermost_notification',true,$USER->id);
+            set_user_preference('message_processor_mattermost_notification', true, $USER->id);
         } else {
-            set_user_preference('message_processor_mattermost_notification',false,$USER->id);
+            set_user_preference('message_processor_mattermost_notification', false, $USER->id);
         }
     }
 
@@ -119,8 +131,8 @@ class manager {
      * Check if mattermost notification is enabled/disabled for user.
      * @param int $userid The id of the user in question.
      * @return boolean Success.
-    */
-    public function is_notification_enabled($userid){
+     */
+    public function is_notification_enabled($userid) {
         return get_user_preferences('message_processor_mattermost_notification', '', $userid) == 1;
     }
 }

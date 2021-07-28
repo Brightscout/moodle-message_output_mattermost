@@ -15,17 +15,29 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mattermost message plugin version information.
+ *
  * @package   message_mattermost
  * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/
+ */
 
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/message/output/lib.php');
 
+/**
+ * The mattermost message processor
+ *
+ * @package   message_mattermost
+ * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class message_output_mattermost extends message_output {
 
+    /**
+     * Constructor to add needed properties to the Mattermost app.
+     */
     public function __construct() {
         $this->manager = new message_mattermost\manager();
     }

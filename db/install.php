@@ -15,17 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mattermost message processor installation code.
+ *
  * @package   message_mattermost
  * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/
+ */
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
  * Install the Mattermost message processor
  */
-
 function xmldb_message_mattermost_install() {
     global $DB;
     $result = true;

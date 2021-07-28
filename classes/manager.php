@@ -36,8 +36,8 @@ class manager {
     }
 
     /**
-     * Send the message to Telegram.
-     * @param string $message The message contect to send to Slack.
+     * Send the message to Mattermost.
+     * @param string $message The message contect to send to Mattermost.
      * @param string $email The Moodle user email that is being sent to.
     */
     public function send_message($message, $email) {
@@ -121,8 +121,6 @@ class manager {
      * @return boolean Success.
     */
     public function is_notification_enabled($userid){
-        $preferences = new \stdClass();
-        $preferences->mattermost_notification = get_user_preferences('message_processor_mattermost_notification', '', $userid);
-        return $preferences->mattermost_notification == 1;
+        return get_user_preferences('message_processor_mattermost_notification', '', $userid) == 1;
     }
 }

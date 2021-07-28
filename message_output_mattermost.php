@@ -94,7 +94,7 @@ class message_output_mattermost extends message_output {
      * @return boolean true if Mattermost is configured
      */
     public function is_system_configured() {
-        return (!empty(get_config('message_mattermost', 'serverurl')) && !empty(get_config('message_mattermost', 'secret')));
+        return !(empty(get_config('message_mattermost', 'serverurl')) || empty(get_config('message_mattermost', 'secret')));
     }
 
     /**

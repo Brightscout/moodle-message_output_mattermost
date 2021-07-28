@@ -38,4 +38,3 @@ $userid = optional_param('userid', 0, PARAM_INT);
 
 $message = $mattermostmanager->update_preference($pref);
 redirect(new moodle_url('/message/notificationpreferences.php', ['userid' => $userid]), $message);
-

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Mattermost message plugin version information.
+ * Mattermost message processor to send messages by mattermost
  *
  * @package   message_mattermost
  * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>

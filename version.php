@@ -15,14 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Mattermost message plugin version information.
+ *
  * @package   message_mattermost
  * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-*/
+ */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2021071900;  // The current module version (Date: YYYYMMDDXX)
+$plugin->version  = 2021071900;  // The current module version (Date: YYYYMMDDXX).
 $plugin->requires = 2016111500; // Moodle version.
 
 $plugin->component = 'message_mattermost';

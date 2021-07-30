@@ -62,7 +62,7 @@ class message_output_mattermost extends message_output {
             return true;
         }
 
-        return $this->manager->send_message($eventdata->fullmessage, $eventdata->userto->email);
+        return $this->manager->send_message($eventdata);
     }
 
     /**

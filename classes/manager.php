@@ -46,10 +46,9 @@ class manager {
 
     /**
      * Send the message to Mattermost.
-     * @param string $message The message contect to send to Mattermost.
-     * @param string $email The Moodle user email that is being sent to.
+     * @param stdClass $eventdata the event data submitted by the message sender plus $eventdata->savedmessageid
      */
-    public function send_message($message, $email) {
+    public function send_message($eventdata) {
         $curl = new \curl();
 
         $options = [
@@ -61,8 +60,10 @@ class manager {
         ];
 
         $payload = array(
-            'email' => $email,
-            'message' => $message,
+            'email' => $eventdata->userto->email,
+            'message' => $eventdata->fullmessage,
+            'messageHTML' => $eventdata->fullmessagehtml,
+            'subject' => $eventdata->subject,
         );
         $payload = json_encode($payload);
 

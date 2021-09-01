@@ -99,7 +99,7 @@ class manager {
         $checked = '';
         $text = 'Enable Mattermost Notifications';
         $pref = true;
-        if ((bool)get_user_preferences('message_processor_mattermost_notification', null, $userid)) {
+        if ((bool)get_user_preferences('message_processor_mattermost_notification', true, $userid)) {
             $checked = 'checked="checked"';
             $text = 'Disable Mattermost Notifications';
             $pref = false;
@@ -134,6 +134,6 @@ class manager {
      * @return boolean Success.
      */
     public function is_notification_enabled($userid) {
-        return get_user_preferences('message_processor_mattermost_notification', '', $userid) == 1;
+        return get_user_preferences('message_processor_mattermost_notification', true, $userid) == 1;
     }
 }

@@ -98,7 +98,7 @@ class message_output_mattermost extends message_output {
      * @param int $userid the user id
      */
     public function load_data(&$preferences, $userid) {
-        $preferences->mattermost_notification = get_user_preferences('message_processor_mattermost_notification', '', $userid);
+        $preferences->mattermost_notification = get_user_preferences('message_processor_mattermost_notification', true, $userid);
     }
 
     /**

@@ -18,7 +18,8 @@
  * Strings for mattermost message plugin.
  *
  * @package   message_mattermost
- * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
+ * @copyright 2021 Brightscout <hello@brightscout.com>
+ * @author    2021 Hrishav Kumar <hrishav.kumar@brightscout.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,5 +29,7 @@ $string['notconfigured'] = 'The Mattermost server hasn\'t been configured so Mat
 $string['pluginname'] = 'Mattermost';
 $string['secret'] = 'Webhook secret';
 $string['serverurl'] = 'Mattermost Server URL';
+$string['defaultnotificationstate'] = 'Is mattermost notification enabled by default?';
 $string['configserverurl'] = 'Mattermost server URL where notification will be sent.';
 $string['configsecret'] = 'Mattermost notification plugin secret which is installed on the server above.';
+$string['defaultnotification_desc'] = 'Default Mattermost notification state for a new moodle user';

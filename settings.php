@@ -30,6 +30,10 @@ if ($ADMIN->fulltree) {
         get_string('configserverurl', 'message_mattermost'), '', PARAM_TEXT));
     $settings->add(new admin_setting_configtext('message_mattermost/secret', get_string('secret', 'message_mattermost'),
         get_string('configsecret', 'message_mattermost'), '', PARAM_TEXT));
-    $settings->add(new admin_setting_configcheckbox('message_mattermost/defaultnotificationstate', get_string('defaultnotificationstate', 'message_mattermost'),
-        get_string('defaultnotification_desc', 'message_mattermost'), 1));
+    $settingspage->add(new admin_setting_configcheckbox(
+        'message_mattermost/defaultnotificationstate',
+        get_string('defaultnotificationstate', 'message_mattermost'),
+        get_string('defaultnotification_desc', 'message_mattermost'),
+        1
+    ));
 }

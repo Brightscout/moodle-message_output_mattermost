@@ -18,7 +18,8 @@
  * Mattermost message processor to send messages by mattermost
  *
  * @package   message_mattermost
- * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
+ * @copyright 2021 Brightscout <hello@brightscout.com>
+ * @author    2021 Hrishav Kumar <hrishav.kumar@brightscout.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -30,7 +31,8 @@ require_once($CFG->dirroot.'/message/output/lib.php');
  * The mattermost message processor
  *
  * @package   message_mattermost
- * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
+ * @copyright 2021 Brightscout <hello@brightscout.com>
+ * @author    2021 Hrishav Kumar <hrishav.kumar@brightscout.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class message_output_mattermost extends message_output {
@@ -98,7 +100,10 @@ class message_output_mattermost extends message_output {
      * @param int $userid the user id
      */
     public function load_data(&$preferences, $userid) {
-        $preferences->mattermost_notification = get_user_preferences('message_processor_mattermost_notification', true, $userid);
+        $preferences->mattermost_notification = get_user_preferences(
+        'message_processor_mattermost_notification',
+        $this->config->defaultnotificationstate,
+        $userid);
     }
 
     /**

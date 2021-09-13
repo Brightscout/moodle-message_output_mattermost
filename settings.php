@@ -18,7 +18,8 @@
  * Mattermost message plugin settings.
  *
  * @package   message_mattermost
- * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
+ * @copyright 2021 Brightscout <hello@brightscout.com>
+ * @author    2021 Hrishav Kumar <hrishav.kumar@brightscout.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,4 +30,10 @@ if ($ADMIN->fulltree) {
         get_string('configserverurl', 'message_mattermost'), '', PARAM_TEXT));
     $settings->add(new admin_setting_configtext('message_mattermost/secret', get_string('secret', 'message_mattermost'),
         get_string('configsecret', 'message_mattermost'), '', PARAM_TEXT));
+    $settingspage->add(new admin_setting_configcheckbox(
+        'message_mattermost/defaultnotificationstate',
+        get_string('defaultnotificationstate', 'message_mattermost'),
+        get_string('defaultnotificationstate_desc', 'message_mattermost'),
+        1
+    ));
 }

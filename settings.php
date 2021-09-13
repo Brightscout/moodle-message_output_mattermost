@@ -33,7 +33,7 @@ if ($ADMIN->fulltree) {
     $settingspage->add(new admin_setting_configcheckbox(
         'message_mattermost/defaultnotificationstate',
         get_string('defaultnotificationstate', 'message_mattermost'),
-        get_string('defaultnotification_desc', 'message_mattermost'),
+        get_string('defaultnotificationstate_desc', 'message_mattermost'),
         1
     ));
 }

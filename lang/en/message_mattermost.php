@@ -32,4 +32,4 @@ $string['serverurl'] = 'Mattermost Server URL';
 $string['defaultnotificationstate'] = 'Is mattermost notification enabled by default?';
 $string['configserverurl'] = 'Mattermost server URL where notification will be sent.';
 $string['configsecret'] = 'Mattermost notification plugin secret which is installed on the server above.';
-$string['defaultnotification_desc'] = 'Default Mattermost notification state for a new moodle user';
+$string['defaultnotificationstate_desc'] = 'Default Mattermost notification state for a new moodle user';

@@ -25,10 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2021071900;  // The current module version (Date: YYYYMMDDXX).
+$plugin->version  = 2021091300;  // The current module version (Date: YYYYMMDDXX).
 $plugin->requires = 2016111500; // Moodle version.
 
 $plugin->component = 'message_mattermost';
 
-$plugin->release  = '0.1.0 (Build - 2021071900)';
+$plugin->release  = '1.0.0 (Build - 2021071900)';
 $plugin->maturity  = MATURITY_BETA;

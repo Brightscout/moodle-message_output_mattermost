@@ -18,7 +18,8 @@
  * Mattermost message plugin manager.
  *
  * @package   message_mattermost
- * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
+ * @copyright 2021 Brightscout <hello@brightscout.com>
+ * @author    2021 Hrishav Kumar <hrishav.kumar@brightscout.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +33,8 @@ require_once($CFG->dirroot.'/lib/filelib.php');
  * Mattermot helper manager class
  *
  * @package   message_mattermost
- * @copyright 2020, Hrishav Kumar <hrishav.kumar@brightscout.com>
+ * @copyright 2021 Brightscout <hello@brightscout.com>
+ * @author    2021 Hrishav Kumar <hrishav.kumar@brightscout.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class manager {
@@ -99,8 +101,9 @@ class manager {
         $checked = '';
         $text = 'Enable Mattermost Notifications';
         $pref = true;
-        $defaultnotificationstate = $this->config->defaultnotificationstate;
-        if ((bool)get_user_preferences('message_processor_mattermost_notification', $defaultnotificationstate, $userid)) {
+        if ((bool)get_user_preferences('message_processor_mattermost_notification',
+        $this->config->defaultnotificationstate,
+        $userid)) {
             $checked = 'checked="checked"';
             $text = 'Disable Mattermost Notifications';
             $pref = false;
@@ -135,7 +138,8 @@ class manager {
      * @return boolean Success.
      */
     public function is_notification_enabled($userid) {
-        $defaultnotificationstate = $this->config->defaultnotificationstate;
-        return get_user_preferences('message_processor_mattermost_notification', $defaultnotificationstate, $userid) == 1;
+        return get_user_preferences('message_processor_mattermost_notification',
+        $this->config->defaultnotificationstate,
+        $userid) == 1;
     }
 }

@@ -1,5 +1,5 @@
-# Mattermost message processor
-This plugin provides a message processor for Mattermost. A Mattermost site can configure the [mattermost notification plugin](https://github.com/Brightscout/x-mattermost-plugin-moodle-notification) to be used for message outputs. Then, any Moodle user who is a member of that Mattermost site can configure their account to enable/disable Mattermost notifications and receive Moodle notifications to their Mattermost account having the same email as the Moodle account.
+# Mattermost Message Processor
+This plugin provides a message processor for Mattermost. A Mattermost site can configure the [mattermost notification plugin](https://github.com/Brightscout/mattermost-plugin-moodle-notification) to be used for message outputs. Then, any Moodle user who is a member of that Mattermost site can configure their account to enable/disable Mattermost notifications and receive Moodle notifications to their Mattermost account having the same email as the Moodle account.
 
 ## Configuring the plugin settings
 
@@ -21,3 +21,7 @@ Once Mattermost is configured for your site, users can enable/disable notificati
    * ![image](https://user-images.githubusercontent.com/33994932/127831621-71101b07-6227-4cc4-9583-df19ed97b845.png)
 
 Click the "Enable Mattermost Notifications" button, and the user account with the same email on Mattermost and Moodle will be connected. Now, the user can select what messages and notifications they wish to receive through Mattermost.
+
+---
+
+Made with &#9829; by [Brightscout](http://www.brightscout.com)

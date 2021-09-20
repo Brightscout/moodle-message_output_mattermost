@@ -102,7 +102,7 @@ class message_output_mattermost extends message_output {
     public function load_data(&$preferences, $userid) {
         $preferences->mattermost_notification = get_user_preferences(
         'message_processor_mattermost_notification',
-        $this->config->defaultnotificationstate,
+        get_config('message_mattermost', 'defaultnotificationstate'),
         $userid);
     }
 

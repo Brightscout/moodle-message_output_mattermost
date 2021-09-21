@@ -41,9 +41,15 @@ class manager {
 
     /**
      * Constructor. Loads all needed data.
+     *
+     * @param array $config
      */
-    public function __construct() {
-        $this->config = get_config('message_mattermost');
+    public function __construct($config = null) {
+        if ($config) {
+            $this->config = $config;
+        } else {
+            $this->config = get_config('message_mattermost');
+        }
     }
 
     /**
@@ -122,9 +128,15 @@ class manager {
     /**
      * Update the user's mattermost notification preference.
      * @param bool $val The preference to set.
+     * @param array $user
      */
-    public function update_preference($val) {
+    public function update_preference($val, $user = null) {
         global $USER;
+
+        if ($user) {
+            $USER = $user;
+        }
+
         if ($val == 1) {
             set_user_preference('message_processor_mattermost_notification', true, $USER->id);
         } else {

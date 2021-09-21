@@ -133,12 +133,12 @@ class message_mattermost_manager_test extends advanced_testcase {
         // Create a new test user.
         $user = $this->create_test_user_and_reset_state();
 
-        $mattermostmanager->update_preference(0, $user);
+        $mattermostmanager->update_preference(false, $user);
         $outputpreferences = $DB->get_record('user_preferences', array(
             'userid' => $user->id
         ));
 
-        $this->assertTrue($outputpreferences->value == 0);
+        $this->assertFalse($outputpreferences->value == 1);
     }
 
     /**

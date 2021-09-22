@@ -47,12 +47,12 @@ class message_mattermost_manager_test extends advanced_testcase {
     }
 
     /**
-     * Set plugin config properties for tests
+     * Set plugin's default notification state property for tests
      *
-     * @param int $defaultnotificationstate - determines if plugin is enabled or disabled
-     * 0 is considered as disabled and 1 as enabled
+     * @param int $defaultnotificationstate - determines if mattermost notification should be enabled/disabled
+     * by default for a user. 0 is considered as disabled and 1 as enabled.
      */
-    public function set_plugin_config($defaultnotificationstate = 1) {
+    public function set_plugin_default_notification_state($defaultnotificationstate = 1) {
         $config = get_config('message_mattermost');
         $config->defaultnotificationstate = $defaultnotificationstate;
 
@@ -76,7 +76,7 @@ class message_mattermost_manager_test extends advanced_testcase {
      * Function to test config_form when notificationstate is enabled
      */
     public function test_config_form_with_notificationstate_enabled() {
-        $config = $this->set_plugin_config();
+        $config = $this->set_plugin_default_notification_state();
         $mattermostmanager = new message_mattermost\manager($config);
 
         // Create a new test user.
@@ -92,13 +92,13 @@ class message_mattermost_manager_test extends advanced_testcase {
      * Function to test config_form when notificationstate is disabled
      */
     public function test_config_form_with_notificationstate_disabled() {
-        $config = $this->set_plugin_config(0);
+        $config = $this->set_plugin_default_notification_state(0);
         $mattermostmanager = new message_mattermost\manager($config);
 
         // Create a new test user.
         $user = $this->create_test_user_and_reset_state();
 
-        // Test configbutton when plugin is disabled.
+        // Test config button when the notificationstate is disabled.
         $outputconfigbutton = $mattermostmanager->config_form('', $user->id);
         $expectedconfigbutton = 'Enable Mattermost Notifications';
 
@@ -133,7 +133,7 @@ class message_mattermost_manager_test extends advanced_testcase {
         // Create a new test user.
         $user = $this->create_test_user_and_reset_state();
 
-        $mattermostmanager->update_preference(false, $user);
+        $mattermostmanager->update_preference(0, $user);
         $outputpreferences = $DB->get_record('user_preferences', array(
             'userid' => $user->id
         ));
@@ -145,7 +145,7 @@ class message_mattermost_manager_test extends advanced_testcase {
      * Function to test is_notification_enabled when notificationstate is enabled
      */
     public function test_is_notification_enabled() {
-        $config = $this->set_plugin_config();
+        $config = $this->set_plugin_default_notification_state();
         $mattermostmanager = new message_mattermost\manager($config);
 
         global $USER;
@@ -157,7 +157,7 @@ class message_mattermost_manager_test extends advanced_testcase {
      * Function to test is_notification_enabled when notificationstate is disabled
      */
     public function test_is_notification_disabled() {
-        $config = $this->set_plugin_config(0);
+        $config = $this->set_plugin_default_notification_state(0);
         $mattermostmanager = new message_mattermost\manager($config);
 
         global $USER;

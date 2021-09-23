@@ -30,5 +30,5 @@ $plugin->requires = 2016111500; // Moodle version.
 
 $plugin->component = 'message_mattermost';
 
-$plugin->release  = '1.0.0 (Build - 2021071900)';
-$plugin->maturity  = MATURITY_BETA;
+$plugin->release  = '1.0.1 (Build - 2021071900)';
+$plugin->maturity  = MATURITY_STABLE;
